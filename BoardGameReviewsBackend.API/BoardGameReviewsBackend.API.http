@@ -1,0 +1,6 @@
+@BoardGameReviewsBackend.API_HostAddress = http://localhost:5190
+
+GET {{BoardGameReviewsBackend.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
