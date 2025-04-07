@@ -11,4 +11,13 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\BoardGameReviewsBackend.Business\BoardGameReviewsBackend.Business.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Requests\Reviews\" />
+      <Folder Include="Requests\Users\" />
+    </ItemGroup>
+
 </Project>

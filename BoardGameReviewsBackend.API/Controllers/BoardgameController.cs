@@ -1,4 +1,5 @@
-using BoardGameReviewsBackend.Models;
+using BoardGameReviewsBackend.API.Requests.Boardgames;
+using BoardGameReviewsBackend.Business.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BoardGameReviewsBackend.Controllers
@@ -7,17 +8,47 @@ namespace BoardGameReviewsBackend.Controllers
     [Route("[controller]")]
     public class BoardgameController : ControllerBase
     {
-        private readonly ILogger<BoardgameController> _logger;
+        public IBoardGameService _boardgameService;
 
-        public BoardgameController(ILogger<BoardgameController> logger)
+        public BoardgameController(IBoardGameService boardgameService)
         {
-            _logger = logger;
+            _boardgameService = boardgameService;
         }
 
-        [HttpGet(Name = "getBoardgame")]
-        public IEnumerable<BoardGame> Get()
+        [HttpGet("get-all")]
+        public IActionResult GetAllBoardgames()
         {
-            return new BoardGame[]{};
+            return Ok(_boardgameService.GetAllBoardgames());
         }
+        
+        [HttpPost("get-one")]
+        public IActionResult  GetBoardgame([FromBody] GetBoardgameRequest request)
+        {
+            return Ok(_boardgameService.GetBoardgame(request.boardgameId));
+        }
+        
+        [HttpPost("add")]
+        public IActionResult AddBoardgame([FromBody] AddBoardgameRequest addBoardgameRequest)
+        {
+            bool addedBoardgame = _boardgameService.AddBoardgame();
+            
+            if (addedBoardgame) 
+                return Ok();
+            else
+                return BadRequest();
+        }
+        
+        [HttpDelete("delete")]
+        public IActionResult DeleteBoardgame([FromBody] DeleteBoardgameRequest request)
+        {
+            return Ok(_boardgameService.DeleteBoardgame(request.boardgameId));
+        }
+        
+        [HttpPut("update")]
+        public IActionResult UpdateBoardgame()
+        {
+            return Ok();
+        }
+        
     }
 }
