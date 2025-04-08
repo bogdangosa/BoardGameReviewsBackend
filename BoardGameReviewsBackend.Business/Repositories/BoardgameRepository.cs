@@ -46,6 +46,29 @@ public class BoardgameRepository : IBoardgameRepository
             weight = 4,
             rating = 9
         });
+        boardGames.Add(new BoardGame{
+            boardgameId = 4,
+            Title= "Azul Duel",
+            Description= "Decorate a palace ceiling after creating your own pattern.",
+            Category= "Abstract",
+            nrOfPlayers= 2,
+            playTime= 60,
+            ReleaseDate = new DateTime(2021,1,1),
+            weight= 2,
+            rating = 7,
+        });
+        boardGames.Add(new BoardGame{
+            boardgameId = 5,
+            Title= "Lost Ruins of Arnak",
+            Description= "Explore an island, discover artifacts, and defeat guardians.",
+            Category= "Strategy",
+            nrOfPlayers= 1,
+            playTime= 120,
+            ReleaseDate = new DateTime(2020,1,1),
+            weight= 2,
+            rating = 5
+        });
+        
     }
 
 
@@ -61,7 +84,9 @@ public class BoardgameRepository : IBoardgameRepository
 
     public bool Add(BoardGame boardgame)
     {
-        throw new NotImplementedException();
+        boardgame.boardgameId = boardGames.Count + 1;
+        boardGames.Add(boardgame);
+        return true;
     }
 
     public void Update(BoardGame boardgame)

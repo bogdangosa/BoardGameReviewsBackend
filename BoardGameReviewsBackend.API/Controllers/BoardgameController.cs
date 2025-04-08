@@ -16,21 +16,25 @@ namespace BoardGameReviewsBackend.Controllers
         }
 
         [HttpGet("get-all")]
-        public IActionResult GetAllBoardgames()
+        public IActionResult GetAllBoardgames([FromQuery] GetBoardgamesRequest request)
         {
-            return Ok(_boardgameService.GetAllBoardgames());
+            int currentPage = request.page ?? 1;
+            int itemsPerPage = request.itemsPerPage ?? 4;
+            string sortOrder = request.sortOrder ?? "none";
+            string category = request.category ?? "all";
+            return Ok(_boardgameService.GetAllBoardgames(currentPage,itemsPerPage,sortOrder,category));
         }
         
-        [HttpPost("get-one")]
-        public IActionResult  GetBoardgame([FromBody] GetBoardgameRequest request)
+        [HttpGet("get-one")]
+        public IActionResult  GetBoardgame([FromQuery] long boardgameId)
         {
-            return Ok(_boardgameService.GetBoardgame(request.boardgameId));
+            return Ok(_boardgameService.GetBoardgame(boardgameId));
         }
         
         [HttpPost("add")]
         public IActionResult AddBoardgame([FromBody] AddBoardgameRequest addBoardgameRequest)
         {
-            bool addedBoardgame = _boardgameService.AddBoardgame();
+            bool addedBoardgame = _boardgameService.AddBoardgame(addBoardgameRequest.toModel());
             
             if (addedBoardgame) 
                 return Ok();
@@ -39,13 +43,13 @@ namespace BoardGameReviewsBackend.Controllers
         }
         
         [HttpDelete("delete")]
-        public IActionResult DeleteBoardgame([FromBody] DeleteBoardgameRequest request)
+        public IActionResult DeleteBoardgame([FromQuery] DeleteBoardgameRequest request)
         {
             return Ok(_boardgameService.DeleteBoardgame(request.boardgameId));
         }
         
-        [HttpPut("update")]
-        public IActionResult UpdateBoardgame()
+        [HttpPatch("update")]
+        public IActionResult UpdateBoardgame([FromBody] UpdateBoardgameRequest request)
         {
             return Ok();
         }
