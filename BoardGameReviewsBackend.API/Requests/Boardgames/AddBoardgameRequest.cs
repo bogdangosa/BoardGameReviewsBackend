@@ -10,4 +10,6 @@ public class AddBoardgameRequest
     public int? playTime { get; set; }
     public int? weight { get; set; }
     public int? rating { get; set; }
+    
+    public IFormFile? ImageFile { get; set; }
 }

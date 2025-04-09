@@ -6,6 +6,8 @@ public interface IBoardGameService
 {
     public bool AddBoardgame(BoardGame boardGame);
     public BoardGame GetBoardgame(long boardgameId);
-    public List<BoardGame> GetAllBoardgames(int page=1,int itemsPerPage=4,string sortOrder="none", string category="all");
+    public List<BoardGame> GetFilteredBoardgames(int page=1,int itemsPerPage=4,string sortOrder="none", string category="All");
+    public List<BoardGame> GetAllBoardgames();
     public bool DeleteBoardgame(long boardgameId);
+    public bool UpdateBoardgame(BoardGame boardGame);
 }

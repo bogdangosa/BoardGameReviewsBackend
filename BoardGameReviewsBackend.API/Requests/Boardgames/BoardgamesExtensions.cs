@@ -17,5 +17,18 @@ public static class BoardgamesExtensions
             weight  = request.weight,
             rating  = request.rating,
         };
+    public static BoardGame toModel(this UpdateBoardgameRequest request) => 
+        new BoardGame
+        {
+            boardgameId = request.BoardgameId,
+            Title = request.Title,
+            Description = request.Description,
+            Category = request.Category,
+            ReleaseDate = request.ReleaseDate,
+            nrOfPlayers = request.nrOfPlayers,
+            playTime = request.playTime,
+            weight  = request.weight,
+            rating  = request.rating,
+        };
 
 }

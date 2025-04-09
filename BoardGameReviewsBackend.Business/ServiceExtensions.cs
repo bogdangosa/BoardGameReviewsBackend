@@ -8,5 +8,6 @@ public static class ServiceExtensions
     public static void AddApplicationServices(this IServiceCollection services)
     {
         services.AddScoped<IBoardGameService, BoardGameService>(); 
+        services.AddTransient<IImageService, ImageService>(); 
     }
 }

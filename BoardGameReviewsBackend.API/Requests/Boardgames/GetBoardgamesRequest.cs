@@ -10,6 +10,6 @@ public class GetBoardgamesRequest
     public int? itemsPerPage { get; set; }
     [DefaultValue("none")]
     public string? sortOrder { get; set; }
-    [DefaultValue("all")]
+    [DefaultValue("All")]
     public string? category { get; set; }
 }

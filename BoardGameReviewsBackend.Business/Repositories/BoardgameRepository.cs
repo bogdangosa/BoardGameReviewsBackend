@@ -9,6 +9,11 @@ public class BoardgameRepository : IBoardgameRepository
     public BoardgameRepository()
     {
         this.boardGames = new List<BoardGame>();
+        AddDummyData();
+    }
+
+    private void AddDummyData()
+    {
         boardGames.Add(new BoardGame
             {
                 boardgameId = 1,
@@ -69,8 +74,111 @@ public class BoardgameRepository : IBoardgameRepository
             rating = 5
         });
         
+        boardGames.Add(new BoardGame
+        {
+            boardgameId = 9,
+            Title = "Carcassonne",
+            Description = "A tile-placement game where players build a medieval landscape.",
+            Category = "Strategy",
+            nrOfPlayers = 2,
+            playTime = 35,
+            ReleaseDate = new DateTime(2000, 5, 1),
+            weight = 1,
+            rating = 6
+        });
+
+        boardGames.Add(new BoardGame
+        {
+            boardgameId = 10,
+            Title = "7 Wonders",
+            Description = "Develop your civilization by drafting cards that build cities and wonders.",
+            Category = "Strategy",
+            nrOfPlayers = 3,
+            playTime = 30,
+            ReleaseDate = new DateTime(2010, 1, 1),
+            weight = 1,
+            rating = 8
+        });
+
+        boardGames.Add(new BoardGame
+        {
+            boardgameId = 11,
+            Title = "Dominion",
+            Description = "Build your deck and compete to acquire the most victory points.",
+            Category = "Strategy",
+            nrOfPlayers = 2,
+            playTime = 45,
+            ReleaseDate = new DateTime(2008, 1, 1),
+            weight = 2,
+            rating = 9
+        });
+        
+        boardGames.Add(new BoardGame{
+            boardgameId = 1,
+            Title = "Brass: Birmingham",
+            Description = "Build networks, grow industries, and navigate the world of the Industrial Revolution.",
+            Category = "Strategy",
+            nrOfPlayers = 2,
+            playTime = 60,
+            ReleaseDate = new DateTime(2018, 1, 1),
+            weight = 3,
+            rating = 8,
+        });
+        
+        boardGames.Add(new BoardGame{
+            boardgameId = 2,
+            Title = "Pandemic Legacy: Season 1",
+            Description = "Mutating diseases are spreading around the world - can your team save humanity?",
+            Category = "Cooperative",
+            nrOfPlayers = 1,
+            playTime = 90,
+            ReleaseDate = new DateTime(2015, 1, 1),
+            weight = 2,
+            rating = 8,
+        });
+        
+        boardGames.Add(new BoardGame{
+            boardgameId = 3,
+            Title = "Ark Nova",
+            Description = "Plan and build a modern, scientifically managed zoo to support conservation projects.",
+            Category = "Strategy",
+            nrOfPlayers = 5,
+            playTime = 60,
+            ReleaseDate = new DateTime(2021, 1, 1),
+            weight = 2,
+            rating = 8,
+        });
+        
+        boardGames.Add(new BoardGame{
+            boardgameId = 6,
+            Title = "Dune: Imperium",
+            Description = "Influence, intrigue, and combat in the universe of Dune.",
+            Category = "Cooperative",
+            nrOfPlayers = 5,
+            playTime = 90,
+            ReleaseDate = new DateTime(2020, 1, 1),
+            weight = 5,
+            rating = 8,
+        });
+        
+        boardGames.Add(new BoardGame{
+            boardgameId = 7,
+            Title = "Terraforming Mars",
+            Description = "Compete with rival CEOs to make Mars habitable and build your corporate empire.",
+            Category = "Abstract",
+            nrOfPlayers = 4,
+            playTime = 90,
+            ReleaseDate = new DateTime(2016, 1, 1),
+            weight = 5,
+            rating = 8,
+        });
     }
 
+    public bool Clear()
+    {
+        boardGames = new List<BoardGame>();
+        return true;
+    }
 
     public List<BoardGame> GetAll()
     {
@@ -89,9 +197,11 @@ public class BoardgameRepository : IBoardgameRepository
         return true;
     }
 
-    public void Update(BoardGame boardgame)
+    public bool Update(BoardGame boardgame)
     {
-        throw new NotImplementedException();
+        int boardgameiIndex = boardGames.FindIndex(game => game.boardgameId == boardgame.boardgameId);
+        boardGames[boardgameiIndex] = boardgame;
+        return true;
     }
 
     public bool Remove(long boardgameId)

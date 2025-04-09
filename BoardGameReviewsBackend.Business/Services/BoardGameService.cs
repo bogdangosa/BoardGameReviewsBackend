@@ -22,24 +22,49 @@ public class BoardGameService : IBoardGameService
         return _boardgameRepository.GetById(boardgameId);
     }
 
-    public List<BoardGame> GetAllBoardgames(int page=1,int itemsPerPage=4,string sortOrder="none", string category="all")
+    public List<BoardGame> GetFilteredBoardgames(int page=1,int itemsPerPage=4,string sortOrder="none", string category="All")
     {
         List<BoardGame> boardGames = _boardgameRepository.GetAll();
-        if(category != "all")
+        if(category != "All")
             boardGames = boardGames.Where(boardgame => boardgame.Category == category).ToList();
-        if (sortOrder == "alphabetical")
+        if (sortOrder == "Alphabetically")
             boardGames.Sort((boardGame1, boardGame2) => sortAlphabetical(boardGame1, boardGame2));
+        else if (sortOrder == "Rating")
+            boardGames.Sort((boardGame1, boardGame2) => sortByRating(boardGame1, boardGame2));
+        else 
+            boardGames.Sort((boardGame1, boardGame2) => sortById(boardGame1, boardGame2));
         boardGames = boardGames.Skip((page-1)*itemsPerPage).Take(itemsPerPage).ToList();
         return boardGames;
     }
 
+    public List<BoardGame> GetAllBoardgames()
+    {
+        return _boardgameRepository.GetAll();
+    }
+
+    
+    public static int sortById(BoardGame boardgame1, BoardGame boardgame2)
+    {
+        return boardgame1.boardgameId - boardgame2.boardgameId;
+    }
     public static int sortAlphabetical(BoardGame boardgame1, BoardGame boardgame2)
     {
         return boardgame1.Title.CompareTo(boardgame2.Title);
     }
 
+    public static int sortByRating(BoardGame boardgame1, BoardGame boardgame2)
+    {
+        return (boardgame2.rating ?? 0) - (boardgame1.rating ?? 0);
+    }
+    
+
     public bool DeleteBoardgame(long boardgameId)
     {
         return _boardgameRepository.Remove(boardgameId);
+    }
+
+    public bool UpdateBoardgame(BoardGame boardGame)
+    {
+        return _boardgameRepository.Update(boardGame);
     }
 }
