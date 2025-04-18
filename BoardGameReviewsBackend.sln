@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGameReviewsBackend.API
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGameReviewsBackend.Tests", "BoardGameReviewsBackend.Tests\BoardGameReviewsBackend.Tests.csproj", "{FB80DD7D-C2CC-4937-A4A9-BC8F04232CD4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGameReviewsBackend.Data", "BoardGameReviewsBackend.Data\BoardGameReviewsBackend.Data.csproj", "{90B0E335-E65D-4D32-A9A5-070DD9E66602}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGameReviewsBackend.Migrations", "BoardGameReviewsBackend.Migrations\BoardGameReviewsBackend.Migrations.csproj", "{94213732-9103-4FBF-83EE-05F9A1E23A9E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +35,14 @@ Global
 		{FB80DD7D-C2CC-4937-A4A9-BC8F04232CD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB80DD7D-C2CC-4937-A4A9-BC8F04232CD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB80DD7D-C2CC-4937-A4A9-BC8F04232CD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90B0E335-E65D-4D32-A9A5-070DD9E66602}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90B0E335-E65D-4D32-A9A5-070DD9E66602}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90B0E335-E65D-4D32-A9A5-070DD9E66602}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90B0E335-E65D-4D32-A9A5-070DD9E66602}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94213732-9103-4FBF-83EE-05F9A1E23A9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94213732-9103-4FBF-83EE-05F9A1E23A9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94213732-9103-4FBF-83EE-05F9A1E23A9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94213732-9103-4FBF-83EE-05F9A1E23A9E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

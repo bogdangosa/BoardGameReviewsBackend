@@ -6,4 +6,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\BoardGameReviewsBackend.Data\BoardGameReviewsBackend.Data.csproj" />
+    </ItemGroup>
+
 </Project>
