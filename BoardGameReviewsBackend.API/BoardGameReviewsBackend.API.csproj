@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="FluentValidation" Version="12.0.0-preview1" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.14"/>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2"/>
     </ItemGroup>
@@ -18,6 +19,10 @@
     <ItemGroup>
       <Folder Include="Requests\Users\" />
       <Folder Include="Uploads\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Uploads\8dbb58d3-8afc-41fe-be8b-1fecd64f73c4.jpg" />
     </ItemGroup>
 
 </Project>

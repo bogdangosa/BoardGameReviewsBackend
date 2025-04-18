@@ -1,4 +1,5 @@
 namespace BoardGameReviewsBackend.API.Requests.Boardgames;
+using FluentValidation;
 
 public class AddBoardgameRequest
 {
@@ -12,4 +13,14 @@ public class AddBoardgameRequest
     public int? rating { get; set; }
     
     public IFormFile? ImageFile { get; set; }
+}
+
+public class AddBoardgameRequestValidator : AbstractValidator<AddBoardgameRequest>
+{
+    public AddBoardgameRequestValidator()
+    {
+        RuleFor(request => request.Title).NotEmpty().Must(title=> title.Length is > 0 and <= 50);
+        RuleFor(request => request.Description).NotEmpty().Must(title=> title.Length is > 0 and <= 200);
+        RuleFor(request => request.Category).NotEmpty().Must(category => category.Length is > 0 and <= 50);
+    }
 }

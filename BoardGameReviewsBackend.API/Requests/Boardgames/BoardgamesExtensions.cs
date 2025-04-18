@@ -4,13 +4,14 @@ namespace BoardGameReviewsBackend.API.Requests.Boardgames;
 
 public static class BoardgamesExtensions
 {
-    public static BoardGame toModel(this AddBoardgameRequest request) => 
+    public static BoardGame toModel(this AddBoardgameRequest request,string imageAdress) => 
         new BoardGame
         {
             boardgameId = 0,
             Title = request.Title,
             Description = request.Description,
             Category = request.Category,
+            Image = imageAdress,
             ReleaseDate = request.ReleaseDate,
             nrOfPlayers = request.nrOfPlayers,
             playTime = request.playTime,

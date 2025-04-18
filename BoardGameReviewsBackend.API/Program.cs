@@ -1,5 +1,7 @@
+using BoardGameReviewsBackend.API.Hubs.BoardgameStats;
 using BoardGameReviewsBackend.Business;
 using BoardGameReviewsBackend.Business.Repositories;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,18 +10,38 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<IBoardgameRepository, BoardgameRepository>();
 builder.Services.AddApplicationServices();
 builder.Services.AddControllers();
+builder.Services.AddHostedService<StatsBroadcaster>(); 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSignalR();
+
+
+var allowedOrigins = new[] {
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "https://board-game-reviews.vercel.app"
+};
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
-        policy.AllowAnyOrigin()
+        policy.WithOrigins(allowedOrigins)
+            .AllowAnyHeader()
             .AllowAnyMethod()
-            .AllowAnyHeader();
+            .AllowCredentials();
     });
+});
+
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.Limits.MaxRequestBodySize = 52428800; // 50 MB
+});
+
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = 52428800; // 50 MB
 });
 
 var app = builder.Build();
@@ -39,10 +61,13 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = "/Resources"
 });
 
+
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.UseCors("AllowAll");
+
+app.MapHub<BoardgameStatsHub>("/boardgameStatsHub");
 
 app.Run();
