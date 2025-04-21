@@ -14,7 +14,7 @@ public class BoardgameRepository : IBoardgameRepository
 
     private void AddDummyData()
     {
-        Add(new BoardGame
+        AddBoardgame(new BoardGame
             {
                 Title = "Catan",
                 Description = "A game of resource management where players trade and build settlements.",
@@ -26,7 +26,7 @@ public class BoardgameRepository : IBoardgameRepository
                 weight = 4,
                 rating = 8
             });
-        Add(
+        AddBoardgame(
             new BoardGame
             {
                 Title = "Ticket to Ride",
@@ -39,7 +39,7 @@ public class BoardgameRepository : IBoardgameRepository
                 weight = 3,
                 rating = 8
             });
-        Add(new BoardGame
+        AddBoardgame(new BoardGame
         {
             Title = "Pandemic",
             Description = "A cooperative game where players work together to stop a global virus outbreak.",
@@ -51,7 +51,7 @@ public class BoardgameRepository : IBoardgameRepository
             weight = 4,
             rating = 9
         });
-        Add(new BoardGame{
+        AddBoardgame(new BoardGame{
             Title= "Azul Duel",
             Description= "Decorate a palace ceiling after creating your own pattern.",
             Category= "Abstract",
@@ -62,7 +62,7 @@ public class BoardgameRepository : IBoardgameRepository
             weight= 2,
             rating = 7,
         });
-        Add(new BoardGame{
+        AddBoardgame(new BoardGame{
             Title= "Lost Ruins of Arnak",
             Description= "Explore an island, discover artifacts, and defeat guardians.",
             Category= "Strategy",
@@ -74,7 +74,7 @@ public class BoardgameRepository : IBoardgameRepository
             rating = 5
         });
         
-        Add(new BoardGame
+        AddBoardgame(new BoardGame
         {
             Title = "Carcassonne",
             Description = "A tile-placement game where players build a medieval landscape.",
@@ -87,7 +87,7 @@ public class BoardgameRepository : IBoardgameRepository
             rating = 6
         });
 
-        Add(new BoardGame
+        AddBoardgame(new BoardGame
         {
             Title = "7 Wonders",
             Description = "Develop your civilization by drafting cards that build cities and wonders.",
@@ -100,7 +100,7 @@ public class BoardgameRepository : IBoardgameRepository
             rating = 8
         });
 
-        Add(new BoardGame
+        AddBoardgame(new BoardGame
         {
             Title = "Dominion",
             Description = "Build your deck and compete to acquire the most victory points.",
@@ -113,7 +113,7 @@ public class BoardgameRepository : IBoardgameRepository
             rating = 9
         });
         
-        Add(new BoardGame{
+        AddBoardgame(new BoardGame{
             Title = "Brass: Birmingham",
             Description = "Build networks, grow industries, and navigate the world of the Industrial Revolution.",
             Category = "Strategy",
@@ -125,7 +125,7 @@ public class BoardgameRepository : IBoardgameRepository
             rating = 8,
         });
         
-        Add(new BoardGame{
+        AddBoardgame(new BoardGame{
             Title = "Pandemic Legacy: Season 1",
             Description = "Mutating diseases are spreading around the world - can your team save humanity?",
             Category = "Cooperative",
@@ -137,7 +137,7 @@ public class BoardgameRepository : IBoardgameRepository
             rating = 8,
         });
         
-        Add(new BoardGame{
+        AddBoardgame(new BoardGame{
             Title = "Ark Nova",
             Description = "Plan and build a modern, scientifically managed zoo to support conservation projects.",
             Category = "Strategy",
@@ -149,7 +149,7 @@ public class BoardgameRepository : IBoardgameRepository
             rating = 8,
         });
         
-        Add(new BoardGame{
+        AddBoardgame(new BoardGame{
             Title = "Dune: Imperium",
             Description = "Influence, intrigue, and combat in the universe of Dune.",
             Category = "Cooperative",
@@ -161,7 +161,7 @@ public class BoardgameRepository : IBoardgameRepository
             rating = 8,
         });
         
-        Add(new BoardGame{
+        AddBoardgame(new BoardGame{
             Title = "Terraforming Mars",
             Description = "Compete with rival CEOs to make Mars habitable and build your corporate empire.",
             Category = "Abstract",
@@ -185,12 +185,12 @@ public class BoardgameRepository : IBoardgameRepository
         return boardGames;
     }
 
-    public BoardGame GetById(long boardgameId)
+    public BoardGame GetById(int boardgameId)
     {
         return boardGames.Find((game => game.boardgameId == boardgameId));
     }
 
-    public bool Add(BoardGame boardgame)
+    public bool AddBoardgame(BoardGame boardgame)
     {
         boardgame.boardgameId = boardGames.Count + 1;
         boardGames.Add(boardgame);
@@ -205,7 +205,7 @@ public class BoardgameRepository : IBoardgameRepository
         return true;
     }
 
-    public bool Remove(long boardgameId)
+    public bool DeleteBoardgame(int boardgameId)
     {
         return boardGames.Remove(GetById(boardgameId));
     }

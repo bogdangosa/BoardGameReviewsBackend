@@ -6,8 +6,8 @@ public interface IBoardgameRepository
 {
     bool Clear();
     List<BoardGame> GetAll();
-    BoardGame GetById(long boardgameId);
-    bool Add(BoardGame boardgame);
+    BoardGame GetById(int boardgameId);
+    bool AddBoardgame(BoardGame boardgame);
     bool Update(BoardGame boardgame);
-    bool Remove(long boardgameId);
+    bool DeleteBoardgame(int boardgameId);
 }

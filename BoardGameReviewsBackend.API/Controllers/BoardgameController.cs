@@ -37,7 +37,7 @@ namespace BoardGameReviewsBackend.Controllers
         }
         
         [HttpGet("get-one")]
-        public IActionResult  GetBoardgame([FromQuery] long boardgameId)
+        public IActionResult  GetBoardgame([FromQuery] int boardgameId)
         {
             return Ok(_boardgameService.GetBoardgame(boardgameId));
         }

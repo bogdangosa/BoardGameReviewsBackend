@@ -24,7 +24,7 @@ public class TestRepository
     [Test]
     public void Repository_AddBoardGame()
     {
-        var result = boardgameRepository.Add(new BoardGame
+        var result = boardgameRepository.AddBoardgame(new BoardGame
         {
             Title = "Catan",
             Description = "A game of resource management.",
@@ -47,7 +47,7 @@ public class TestRepository
         boardgameRepository.Clear();
         Assert.IsEmpty(boardgameRepository.GetAll());
 
-        Assert.That(boardgameRepository.Add(new BoardGame
+        Assert.That(boardgameRepository.AddBoardgame(new BoardGame
         {
             Title = "Catan",
             Description = "A game of resource management where players trade and build settlements.",
@@ -65,7 +65,7 @@ public class TestRepository
         
         Assert.That(boardgameRepository.GetById(100), Is.Null);
         
-        Assert.That(boardgameRepository.Add(new BoardGame
+        Assert.That(boardgameRepository.AddBoardgame(new BoardGame
            {
                 Title = "Dominion",
                 Description = "Build your deck and compete to acquire the most victory points.",
@@ -79,11 +79,11 @@ public class TestRepository
         
         Assert.That(boardgameRepository.GetAll().Count(), Is.EqualTo(2));
         
-        Assert.That(boardgameRepository.Remove(100), Is.EqualTo(false));
+        Assert.That(boardgameRepository.DeleteBoardgame(100), Is.EqualTo(false));
         
         Assert.That(boardgameRepository.GetAll().Count(), Is.EqualTo(2));
         
-        Assert.That(boardgameRepository.Remove(2), Is.EqualTo(true));
+        Assert.That(boardgameRepository.DeleteBoardgame(2), Is.EqualTo(true));
         
         Assert.That(boardgameRepository.GetAll().Count(), Is.EqualTo(1));
         

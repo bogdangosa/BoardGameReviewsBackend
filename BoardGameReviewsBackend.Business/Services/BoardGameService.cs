@@ -14,10 +14,10 @@ public class BoardGameService : IBoardGameService
     
     public bool AddBoardgame(BoardGame boardgame)
     {
-        return _boardgameRepository.Add(boardgame);
+        return _boardgameRepository.AddBoardgame(boardgame);
     }
 
-    public BoardGame GetBoardgame(long boardgameId)
+    public BoardGame GetBoardgame(int boardgameId)
     {
         return _boardgameRepository.GetById(boardgameId);
     }
@@ -58,9 +58,9 @@ public class BoardGameService : IBoardGameService
     }
     
 
-    public bool DeleteBoardgame(long boardgameId)
+    public bool DeleteBoardgame(int boardgameId)
     {
-        return _boardgameRepository.Remove(boardgameId);
+        return _boardgameRepository.DeleteBoardgame(boardgameId);
     }
 
     public bool UpdateBoardgame(BoardGame boardGame)

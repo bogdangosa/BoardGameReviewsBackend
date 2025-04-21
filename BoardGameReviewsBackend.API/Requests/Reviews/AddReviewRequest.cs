@@ -2,9 +2,8 @@ namespace BoardGameReviewsBackend.API.Requests.Reviews;
 
 public class AddReviewRequest
 {
-    public string  userId { get; set; }
-    public string  boardgameId { get; set; }
-    public long rating { get; set; }
-    public string title { get; set; }
-    public string comment { get; set; }
+    public int  userId { get; set; }
+    public int  boardgameId { get; set; }
+    public int rating { get; set; }
+    public string message { get; set; }
 }
