@@ -1,23 +1,25 @@
 using BoardGameReviewsBackend.Business.Models.Stats;
 using BoardGameReviewsBackend.Business.Repositories;
+using BoardGameReviewsBackend.Business.Services;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BoardGameReviewsBackend.API.Hubs.BoardgameStats;
 
 public class StatsBroadcaster: BackgroundService
 {
     private readonly IHubContext<BoardgameStatsHub> _hubContext;
-    private readonly  IBoardgameRepository _boardgameRepository;
+    private readonly  IBoardGameService _boardgameService;
 
-    public StatsBroadcaster(IHubContext<BoardgameStatsHub> hubContext, IBoardgameRepository boardgameRepository)
+    public StatsBroadcaster(IHubContext<BoardgameStatsHub> hubContext, IBoardGameService boardgameService)
     {
         _hubContext = hubContext;
-        _boardgameRepository = boardgameRepository;
+        _boardgameService = boardgameService;
     }
 
     public async Task BroadcastAll()
     {
-        var data = _boardgameRepository.GetAll();
+        var data = _boardgameService.GetAllBoardgames();
 
         var boardgamesByCategory = data.GroupBy(bg => bg.Category)
             .Select(g => new ChartDataByCategory

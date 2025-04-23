@@ -12,9 +12,9 @@ public class BoardGameService : IBoardGameService
         _boardgameRepository = boardgameRepository;
     }
     
-    public bool AddBoardgame(BoardGame boardgame)
+    public async Task<bool> AddBoardgame(BoardGame boardgame)
     {
-        return _boardgameRepository.AddBoardgame(boardgame);
+        return await _boardgameRepository.AddBoardgame(boardgame);
     }
 
     public BoardGame GetBoardgame(int boardgameId)

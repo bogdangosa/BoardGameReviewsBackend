@@ -1,16 +1,21 @@
 using BoardGameReviewsBackend.API.Hubs.BoardgameStats;
 using BoardGameReviewsBackend.Business;
 using BoardGameReviewsBackend.Business.Repositories;
+using BoardGameReviewsBackend.Data;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddSingleton<IBoardgameRepository, BoardgameRepository>();
+
+builder.Services.AddDbContext<BoardgamesDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IBoardgameRepository, BoardgameRepository>();
 builder.Services.AddApplicationServices();
 builder.Services.AddControllers();
-builder.Services.AddHostedService<StatsBroadcaster>(); 
+//builder.Services.AddHostedService<StatsBroadcaster>(); 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
