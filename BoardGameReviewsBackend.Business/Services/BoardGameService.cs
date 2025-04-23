@@ -58,9 +58,9 @@ public class BoardGameService : IBoardGameService
     }
     
 
-    public bool DeleteBoardgame(int boardgameId)
+    public async Task<bool> DeleteBoardgame(int boardgameId)
     {
-        return _boardgameRepository.DeleteBoardgame(boardgameId);
+        return await _boardgameRepository.DeleteBoardgame(boardgameId);
     }
 
     public bool UpdateBoardgame(BoardGame boardGame)

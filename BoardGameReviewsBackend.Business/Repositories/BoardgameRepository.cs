@@ -54,9 +54,21 @@ public class BoardgameRepository : IBoardgameRepository
         return false;
     }
 
-    public bool DeleteBoardgame(int boardgameId)
+    public async Task<bool> DeleteBoardgame(int boardgameId)
     {
-        return false;
+        try
+        {
+            var boardgameToBeRemoved = _dbContext.Boardgames.Find(boardgameId);
+            _dbContext.Boardgames.Remove(boardgameToBeRemoved);
+
+            await _dbContext.SaveChangesAsync();
+            return true;
+        }
+        catch (Exception exception)
+        {
+            return false;
+        }
+
     }
     
 }

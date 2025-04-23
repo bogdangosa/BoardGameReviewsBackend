@@ -58,9 +58,9 @@ namespace BoardGameReviewsBackend.Controllers
         }
         
         [HttpDelete("delete")]
-        public IActionResult DeleteBoardgame([FromQuery] DeleteBoardgameRequest request)
+        public async Task<IActionResult> DeleteBoardgame([FromQuery] DeleteBoardgameRequest request)
         {
-            return Ok(_boardgameService.DeleteBoardgame(request.boardgameId));
+            return Ok(await _boardgameService.DeleteBoardgame(request.boardgameId));
         }
         
         [HttpPatch("update")]

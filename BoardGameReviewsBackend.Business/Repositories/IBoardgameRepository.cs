@@ -9,5 +9,5 @@ public interface IBoardgameRepository
     BoardGame GetById(int boardgameId);
     Task<bool> AddBoardgame(BoardGame boardgame);
     bool Update(BoardGame boardgame);
-    bool DeleteBoardgame(int boardgameId);
+    Task<bool> DeleteBoardgame(int boardgameId);
 }

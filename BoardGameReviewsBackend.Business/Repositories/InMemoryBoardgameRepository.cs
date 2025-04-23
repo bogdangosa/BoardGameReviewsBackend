@@ -205,7 +205,7 @@ public class InMemoryBoardgameRepository : IBoardgameRepository
         return true;
     }
 
-    public bool DeleteBoardgame(int boardgameId)
+    public async Task<bool> DeleteBoardgame(int boardgameId)
     {
         return boardGames.Remove(GetById(boardgameId));
     }
