@@ -19,17 +19,18 @@ public class BoardgameRepository : IBoardgameRepository
         return true;
     }
 
-    public List<BoardGame> GetAll()
+    public List<Boardgame> GetAllBoardgames()
     {
         var queryResponse = _dbContext.Boardgames.ToList();
-        return queryResponse.ToBoardGameResponses();
+        
+        return queryResponse;
     }
 
-    public BoardGame GetById(int boardgameId)
+    public Boardgame GetBoardgameById(int boardgameId)
     {
         var queryResponse = _dbContext.Boardgames
             .SingleOrDefault(boardgame => boardgame.boardgameid == boardgameId);
-        return queryResponse.ToBoardGameResponse();
+        return queryResponse;
     }
 
     public async Task<bool> AddBoardgame(BoardGame boardgame)

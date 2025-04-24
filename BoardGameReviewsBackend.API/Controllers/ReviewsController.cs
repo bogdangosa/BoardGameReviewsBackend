@@ -27,6 +27,12 @@ namespace BoardGameReviewsBackend.Controllers
             return Ok(_reviewsService.GetReview(reviewId));
         }
         
+        [HttpGet("get-by-boardgame")]
+        public IActionResult  GetReviewsByBoardgame([FromQuery] int boardgameId)
+        {
+            return Ok(_reviewsService.GetReviewsByBoardgameId(boardgameId));
+        }
+        
         [HttpDelete("delete")]
         public IActionResult  DeleteReview([FromQuery] int reviewId)
         {

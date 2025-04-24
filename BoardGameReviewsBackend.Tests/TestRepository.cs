@@ -18,7 +18,7 @@ public class TestRepository
     [Test]
     public void Repository_ShouldBeEmpty()
     {
-        Assert.IsEmpty(boardgameRepository.GetAll());
+        Assert.IsEmpty(boardgameRepository.GetAllBoardgames());
     }
 /*
     [Test]

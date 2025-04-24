@@ -1,24 +1,38 @@
+using BoardGameReviewsBackend.Business.Repositories;
+
 namespace BoardGameReviewsBackend.Business.Services;
 
 public class ReviewsService:IReviewsService
 {
+    private readonly IReviewsRepository _reviewsRepository;
+    
+    public ReviewsService(IReviewsRepository reviewsRepository)
+    {
+        _reviewsRepository = _reviewsRepository;
+    }
+    
     public bool AddReview(Review review)
     {
-        throw new NotImplementedException();
+        return _reviewsRepository.AddReview(review);
     }
 
-    public Review GetReview(long reviewId)
+    public Review GetReview(int reviewId)
     {
-        throw new NotImplementedException();
+        return _reviewsRepository.GetReview(reviewId);
     }
 
     public List<Review> GetAllReviews()
     {
-        throw new NotImplementedException();
+        return _reviewsRepository.GetAllReviews();
     }
 
-    public bool DeleteReview(long reviewId)
+    public List<Review> GetReviewsByBoardgameId(int boardgameId)
     {
-        throw new NotImplementedException();
+        return _reviewsRepository.GetReviewsByBoardgameId(boardgameId);
+    }
+
+    public bool DeleteReview(int reviewId)
+    {
+        return _reviewsRepository.DeleteReview(reviewId);
     }
 }

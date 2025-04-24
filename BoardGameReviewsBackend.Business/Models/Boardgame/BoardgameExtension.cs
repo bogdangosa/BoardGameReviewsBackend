@@ -4,29 +4,41 @@ namespace BoardGameReviewsBackend.Business.Models;
 
 public static class BoardgameExtension
 {
-    public static BoardGame ToBoardGameResponse(this Boardgame boardgame) =>
-        new BoardGame
+    public static BoardgameSummaryResponse ToBoardgameSummaryResponse(this Boardgame boardgame) =>
+        new BoardgameSummaryResponse
         {
             boardgameId = boardgame.boardgameid,
+            Title = boardgame.Title,
+            Description = boardgame.Description,
             Category = boardgame.Category,
             Image = boardgame.Image,
-            Description = boardgame.Description,
-            nrOfPlayers = boardgame.nrOfPlayers,
-            playTime = boardgame.playTime,
-            rating = boardgame.rating,
-            ReleaseDate = boardgame.ReleaseDate,
-            Title = boardgame.Title,
-            weight = boardgame.weight,
+            Rating = 0,
         };
     
-    public static List<BoardGame> ToBoardGameResponses(this List<Boardgame> boardgames)
+    public static List<BoardgameSummaryResponse> ToBoardgameSummaryResponses(this List<Boardgame> boardgames)
     {
-        var boardgameResponses = new List<BoardGame>();
+        var boardgameResponses = new List<BoardgameSummaryResponse>();
         foreach (var boardgame in boardgames)
         {
-            boardgameResponses.Add(boardgame.ToBoardGameResponse());
+            boardgameResponses.Add(boardgame.ToBoardgameSummaryResponse());
         }
 
         return boardgameResponses;
     }
+    
+    public static BoardgameDetailedResponse ToBoardgameDetailedResponse(this Boardgame boardgame) =>
+        new BoardgameDetailedResponse
+        {
+            boardgameId = boardgame.boardgameid,
+            Title = boardgame.Title,
+            Description = boardgame.Description,
+            Category = boardgame.Category,
+            Image = boardgame.Image,
+            Rating = 0,
+            ReleaseDate = boardgame.ReleaseDate,
+            NumberOfPlayers = boardgame.nrOfPlayers,
+            PlayTime = boardgame.playTime,
+            Weight = boardgame.weight,
+        };
+    
 }

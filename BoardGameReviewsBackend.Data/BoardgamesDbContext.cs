@@ -10,6 +10,7 @@ public class BoardgamesDbContext : DbContext
     }
 
     public DbSet<Models.Boardgame> Boardgames { get; set; }
+    public DbSet<Models.Review> Reviews { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

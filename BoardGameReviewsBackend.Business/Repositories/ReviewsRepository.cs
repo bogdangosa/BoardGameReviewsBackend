@@ -1,18 +1,14 @@
+using BoardGameReviewsBackend.Data;
+
 namespace BoardGameReviewsBackend.Business.Repositories;
 
 public class ReviewsRepository:IReviewsRepository
 {
-    private List<Review> reviews;
+    private readonly BoardgamesDbContext _dbContext;
 
-    public ReviewsRepository()
+    public ReviewsRepository(BoardgamesDbContext dbContext)
     {
-        this.reviews = new List<Review>();
-        AddDummyData();
-    }
-
-    private void AddDummyData()
-    {
-        
+        this._dbContext = dbContext;
     }
 
     public bool AddReview(Review review)
@@ -20,7 +16,7 @@ public class ReviewsRepository:IReviewsRepository
         throw new NotImplementedException();
     }
 
-    public Review GetReview(long reviewId)
+    public Review GetReview(int reviewId)
     {
         throw new NotImplementedException();
     }
@@ -30,7 +26,12 @@ public class ReviewsRepository:IReviewsRepository
         throw new NotImplementedException();
     }
 
-    public bool DeleteReview(long reviewId)
+    public List<Review> GetReviewsByBoardgameId(int boardgameId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool DeleteReview(int reviewId)
     {
         throw new NotImplementedException();
     }

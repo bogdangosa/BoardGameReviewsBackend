@@ -1,14 +1,15 @@
 using BoardGameReviewsBackend.Business.Models;
+using BoardGameReviewsBackend.Data.Models;
 
 namespace BoardGameReviewsBackend.Business.Repositories;
 
 public class InMemoryBoardgameRepository : IBoardgameRepository
 {
-    private List<BoardGame> boardGames;
+    private List<Boardgame> boardGames;
 
     public InMemoryBoardgameRepository()
     {
-        this.boardGames = new List<BoardGame>();
+        this.boardGames = new List<Boardgame>();
         AddDummyData();
     }
 
@@ -176,37 +177,37 @@ public class InMemoryBoardgameRepository : IBoardgameRepository
 
     public bool Clear()
     {
-        boardGames = new List<BoardGame>();
+        boardGames = new List<Boardgame>();
         return true;
     }
 
-    public List<BoardGame> GetAll()
+    public List<Boardgame> GetAllBoardgames()
     {
         return boardGames;
     }
-
-    public BoardGame GetById(int boardgameId)
+    
+    public Boardgame GetBoardgameById(int boardgameId)
     {
-        return boardGames.Find((game => game.boardgameId == boardgameId));
+        return boardGames.Find((game => game.boardgameid == boardgameId));
     }
 
     public async Task<bool> AddBoardgame(BoardGame boardgame)
     {
         boardgame.boardgameId = boardGames.Count + 1;
-        boardGames.Add(boardgame);
+        //boardGames.Add(boardgame);
         return true;
     }
 
     public bool Update(BoardGame boardgame)
     {
-        int boardgameiIndex = boardGames.FindIndex(game => game.boardgameId == boardgame.boardgameId);
+        int boardgameiIndex = boardGames.FindIndex(game => game.boardgameid == boardgame.boardgameId);
         boardgame.Image = boardGames[boardgameiIndex].Image;
-        boardGames[boardgameiIndex] = boardgame;
+        //boardGames[boardgameiIndex] = boardgame;
         return true;
     }
 
     public async Task<bool> DeleteBoardgame(int boardgameId)
     {
-        return boardGames.Remove(GetById(boardgameId));
+        return boardGames.Remove(GetBoardgameById(boardgameId));
     }
 }

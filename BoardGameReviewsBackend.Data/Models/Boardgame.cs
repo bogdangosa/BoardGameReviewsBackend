@@ -20,6 +20,6 @@ public class Boardgame
     
     public int? weight { get; set; }
     
-    public int? rating { get; set; }
+    public ICollection<Review> Reviews { get; } = new List<Review>();
     
 }
