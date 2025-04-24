@@ -18,7 +18,7 @@ public class Boardgame
     
     public int? playTime { get; set; }
     
-    public int? weight { get; set; }
+    public double? weight { get; set; }
     
     public ICollection<Review> Reviews { get; } = new List<Review>();
     

@@ -10,6 +10,6 @@ public class BoardgameDetailedResponse
     public DateTime ReleaseDate { get; set; }
     public int? NumberOfPlayers { get; set; }
     public int? PlayTime { get; set; }
-    public int? Weight { get; set; }
+    public double? Weight { get; set; }
     public int Rating { get; set; }   
 }
