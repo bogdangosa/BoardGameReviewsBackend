@@ -4,12 +4,17 @@ namespace BoardGameReviewsBackend.Business.Services;
 
 public interface IUserService
 {
-    public bool AddUser(User user);
+    public Task<bool> AddUser(User user);
+
+    public List<User> GetAllUsers();
+    public User GetUser(int userId);
     
     public User LoginUser(string username, string password);
     
-    public bool ChangePassword(int userId, string oldPassword, string newPassword);
+    public Task<bool> ChangePassword(int userId, string oldPassword, string newPassword);
     
-    public bool DeleteUser(int userId);
+    public Task<bool> DeleteUser(int userId);
+    public Task<bool> MakeUserAdmin(int userId);
     
+    public string GenerateJwtToken(User user);
 }

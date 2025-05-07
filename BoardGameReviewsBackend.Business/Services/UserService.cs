@@ -12,22 +12,42 @@ public class UserService : IUserService
         _userRepository = userRepository;
     }
     
-    public bool AddUser(User user)
+    public async Task<bool> AddUser(User user)
     {
-        throw new NotImplementedException();
+        return await _userRepository.AddUser(user);
+    }
+
+    public List<User> GetAllUsers()
+    {
+        return _userRepository.GetAllUsers();
+    }
+    
+    public User GetUser(int userId)
+    {
+        return _userRepository.GetUser(userId);
     }
 
     public User LoginUser(string username, string password)
     {
-        throw new NotImplementedException();
+        return _userRepository.LoginUser(username, password);
     }
 
-    public bool ChangePassword(int userId, string oldPassword, string newPassword)
+    public async Task<bool> ChangePassword(int userId, string oldPassword, string newPassword)
     {
-        throw new NotImplementedException();
+        return await _userRepository.ChangePassword(userId, oldPassword, newPassword);
     }
 
-    public bool DeleteUser(int userId)
+    public async Task<bool> DeleteUser(int userId)
+    {
+        return await _userRepository.DeleteUser(userId);
+    }
+
+    public async Task<bool> MakeUserAdmin(int userId)
+    {
+        return await _userRepository.MakeUserAdmin(userId);
+    }
+
+    public string GenerateJwtToken(User user)
     {
         throw new NotImplementedException();
     }
