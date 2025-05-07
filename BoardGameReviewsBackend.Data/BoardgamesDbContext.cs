@@ -12,11 +12,37 @@ public class BoardgamesDbContext : DbContext
 
     public DbSet<Models.Boardgame> Boardgames { get; set; }
     public DbSet<Models.Review> Reviews { get; set; }
+    public DbSet<Models.User> Users { get; set; }
+    public DbSet<Models.Log> Logs { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new BoardgameConfiguration());
         base.OnModelCreating(modelBuilder);
+        
+        modelBuilder.Entity<User>().HasData(
+            new User
+            {
+                userId = 1,
+                username = "admin",
+                password = "admin123",
+                isAdmin = true
+            },
+            new User
+            {
+                userId = 2,
+                username = "john_doe",
+                password = "123123",
+                isAdmin = false
+            },
+            new User
+            {
+                userId = 3,
+                username = "jane_smith",
+                password = "password",
+                isAdmin = false
+            }
+        );
         
         modelBuilder.Entity<Boardgame>().HasData(
         new Boardgame
@@ -127,6 +153,18 @@ public class BoardgamesDbContext : DbContext
             playTime = 90,
             weight = 2.0
         }
+    );
+        
+    modelBuilder.Entity<Review>().HasData(
+        new Review { reviewId = 1, rating = 5, message = "Amazing game!", userId = 2, boardgameId = 1 },
+        new Review { reviewId = 2, rating = 4, message = "Great design, but a bit complex.", userId = 3, boardgameId = 2 },
+        new Review { reviewId = 3, rating = 3, message = "Fun but repetitive.", userId = 2, boardgameId = 3 },
+        new Review { reviewId = 4, rating = 5, message = "Perfect for quick games!", userId = 3, boardgameId = 6 },
+        new Review { reviewId = 5, rating = 4, message = "Classic and fun.", userId = 2, boardgameId = 7 },
+        new Review { reviewId = 6, rating = 5, message = "Love the strategy!", userId = 3, boardgameId = 9 },
+        new Review { reviewId = 7, rating = 4, message = "Great for parties.", userId = 2, boardgameId = 8 },
+        new Review { reviewId = 8, rating = 2, message = "Not a fan.", userId = 3, boardgameId = 5 },
+        new Review { reviewId = 9, rating = 5, message = "Absolutely amazing!", userId = 1, boardgameId = 1 }
     );
     }
 }

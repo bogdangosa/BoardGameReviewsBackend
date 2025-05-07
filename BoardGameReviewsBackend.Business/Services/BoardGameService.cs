@@ -6,10 +6,12 @@ namespace BoardGameReviewsBackend.Business.Services;
 public class BoardGameService : IBoardGameService
 {
     private readonly IBoardgameRepository _boardgameRepository;
+    private readonly IReviewsService _reviewsService;
     
-    public BoardGameService(IBoardgameRepository boardgameRepository)
+    public BoardGameService(IBoardgameRepository boardgameRepository,IReviewsService reviewsService)
     {
         _boardgameRepository = boardgameRepository;
+        _reviewsService = reviewsService;
     }
     
     public async Task<bool> AddBoardgame(BoardGame boardgame)
@@ -19,7 +21,9 @@ public class BoardGameService : IBoardGameService
 
     public BoardgameDetailedResponse GetBoardgame(int boardgameId)
     {
-        return _boardgameRepository.GetBoardgameById(boardgameId).ToBoardgameDetailedResponse();
+        BoardgameDetailedResponse response =  _boardgameRepository.GetBoardgameById(boardgameId).ToBoardgameDetailedResponse();
+        response.Rating = _reviewsService.GetAverageRatingOfBoardgame(boardgameId);
+        return response;
     }
 
     public List<BoardgameSummaryResponse> GetFilteredBoardgames(int page=1,int itemsPerPage=4,string sortOrder="none", string category="All")
@@ -43,7 +47,13 @@ public class BoardGameService : IBoardGameService
 
     public List<BoardgameSummaryResponse> GetAllBoardgames()
     {
-        return _boardgameRepository.GetAllBoardgames().ToBoardgameSummaryResponses();
+        List<BoardgameSummaryResponse> boardgameResponses = _boardgameRepository.GetAllBoardgames().ToBoardgameSummaryResponses();
+        foreach (var boardgame in boardgameResponses)
+        {
+            boardgame.Rating = _reviewsService.GetAverageRatingOfBoardgame(boardgame.boardgameId);
+        }
+    
+        return boardgameResponses;
     }
 
     

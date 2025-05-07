@@ -4,10 +4,20 @@ namespace BoardGameReviewsBackend.API.Requests.Reviews;
 
 public static class ReviewsExtensions
 {
-    public static Review toModel(this AddReviewRequest request) => 
-        new Review
+    public static ReviewDTO toModel(this AddReviewRequest request) => 
+        new ReviewDTO
         {
-            reviewId = 0,
+            reviewId = request.reviewId,
+            userId = request.userId,
+            boardgameId = request.boardgameId,
+            rating  = request.rating,
+            message = request.message,
+        };
+    
+    public static ReviewDTO toModel(this UpdateReviewRequest request) => 
+        new ReviewDTO
+        {
+            reviewId = request.reviewId,
             userId = request.userId,
             boardgameId = request.boardgameId,
             rating  = request.rating,

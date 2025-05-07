@@ -11,6 +11,8 @@ namespace BoardGameReviewsBackend.Controllers
     {
         private IBoardGameService _boardgameService;
         private IImageService _imageService;
+        private const int DefaultCurrentPage= 1;
+        private const int DefaultPageSize = 4;
 
         public BoardgameController(IBoardGameService boardgameService,IImageService imageService)
         {
@@ -18,6 +20,11 @@ namespace BoardGameReviewsBackend.Controllers
             _imageService = imageService;
         }
         
+        [HttpGet("is-available")]
+        public IActionResult IsApiAvailable()
+        {
+            return Ok(true);
+        }
         
         [HttpGet("get-all")]
         public IActionResult GetAllBoardgames()
@@ -29,8 +36,8 @@ namespace BoardGameReviewsBackend.Controllers
         [HttpGet("get-filtered")]
         public IActionResult GetFilteredBoardgames([FromQuery] GetBoardgamesRequest request)
         {
-            int currentPage = request.page ?? 1;
-            int itemsPerPage = request.itemsPerPage ?? 4;
+            int currentPage = request.page ?? DefaultCurrentPage;
+            int itemsPerPage = request.itemsPerPage ?? DefaultPageSize;
             string sortOrder = request.sortOrder ?? "none";
             string category = request.category ?? "All";
             return Ok(_boardgameService.GetFilteredBoardgames(currentPage,itemsPerPage,sortOrder,category));

@@ -1,6 +1,6 @@
 namespace BoardGameReviewsBackend.API.Requests.Reviews;
 
-public class AddReviewRequest
+public class UpdateReviewRequest
 {
     public int reviewId { get; set; }
     public int  userId { get; set; }

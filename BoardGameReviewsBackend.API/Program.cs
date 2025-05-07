@@ -1,6 +1,5 @@
 using BoardGameReviewsBackend.API.Hubs.BoardgameStats;
-using BoardGameReviewsBackend.Business;
-using BoardGameReviewsBackend.Business.Repositories;
+using BoardGameReviewsBackend.Business.Extensions;
 using BoardGameReviewsBackend.Data;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<BoardgamesDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddScoped<IBoardgameRepository, BoardgameRepository>();
+builder.Services.AddApplicationRepositories();
 builder.Services.AddApplicationServices();
 builder.Services.AddControllers();
 //builder.Services.AddHostedService<StatsBroadcaster>(); 

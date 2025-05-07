@@ -1,6 +1,6 @@
 namespace BoardGameReviewsBackend.Business;
 
-public class Review
+public class ReviewDTO
 {
     public int reviewId { get; set; }
     public int boardgameId { get; set; }

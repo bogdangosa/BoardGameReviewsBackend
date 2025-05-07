@@ -2,13 +2,16 @@ namespace BoardGameReviewsBackend.Business.Services;
 
 public interface IReviewsService
 {
-    public bool AddReview(Review review);
+    public Task<bool> AddReview(ReviewDTO reviewDto);
     
-    public Review GetReview(int reviewId);
+    public ReviewDTO GetReview(int reviewId);
     
-    public List<Review> GetAllReviews();
+    public List<ReviewDTO> GetAllReviews();
     
-    public List<Review> GetReviewsByBoardgameId(int boardgameId);
+    public List<ReviewDTO> GetReviewsByBoardgameId(int boardgameId);
     
-    public bool DeleteReview(int reviewId);
+    public Task<bool> DeleteReview(int reviewId);
+    public Task<bool> UpdateReview(ReviewDTO reviewDto);
+    public int GetAverageRatingOfBoardgame(int boardgameId);
+    public ReviewDTO GetReviewByBoardgameIdAndUserId(int boardgameId, int userId);
 }

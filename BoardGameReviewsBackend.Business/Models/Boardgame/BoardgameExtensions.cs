@@ -2,7 +2,7 @@ using BoardGameReviewsBackend.Data.Models;
 
 namespace BoardGameReviewsBackend.Business.Models;
 
-public static class BoardgameExtension
+public static class BoardgameExtensions
 {
     public static BoardgameSummaryResponse ToBoardgameSummaryResponse(this Boardgame boardgame) =>
         new BoardgameSummaryResponse

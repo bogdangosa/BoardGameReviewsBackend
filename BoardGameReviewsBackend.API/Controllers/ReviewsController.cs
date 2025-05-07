@@ -33,16 +33,28 @@ namespace BoardGameReviewsBackend.Controllers
             return Ok(_reviewsService.GetReviewsByBoardgameId(boardgameId));
         }
         
-        [HttpDelete("delete")]
-        public IActionResult  DeleteReview([FromQuery] int reviewId)
+        [HttpGet("get-by-user-and-boardgame")]
+        public IActionResult  GetReviewByUserAndBoardgame([FromQuery] int boardgameId,int userId)
         {
-            return Ok(_reviewsService.GetReview(reviewId));
+            return Ok(_reviewsService.GetReviewByBoardgameIdAndUserId(boardgameId,userId));
+        }
+        
+        [HttpDelete("delete")]
+        public async Task<IActionResult>  DeleteReview([FromQuery] int reviewId)
+        {
+            return Ok(await _reviewsService.DeleteReview(reviewId));
         }
         
         [HttpPost("add")]
-        public IActionResult  AddReview([FromBody] AddReviewRequest request)
+        public async Task<IActionResult>  AddReview([FromBody] AddReviewRequest request)
         {
-            return Ok(_reviewsService.AddReview(request.toModel()));
+            return Ok(await _reviewsService.AddReview(request.toModel()));
+        }
+        
+        [HttpPatch("update")]
+        public IActionResult UpdateReview([FromBody] UpdateReviewRequest request)
+        {
+            return Ok(_reviewsService.UpdateReview(request.toModel()));
         }
         
     }
