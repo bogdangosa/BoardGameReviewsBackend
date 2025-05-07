@@ -14,7 +14,7 @@ public class InMemoryBoardgameRepository : IBoardgameRepository
     }
 
     private void AddDummyData()
-    {
+    { /*
         AddBoardgame(new BoardGame
             {
                 Title = "Catan",
@@ -172,7 +172,7 @@ public class InMemoryBoardgameRepository : IBoardgameRepository
             ReleaseDate = new DateTime(2016, 1, 1),
             weight = 5,
             rating = 8,
-        });
+        });*/
     }
 
     public bool Clear()
@@ -191,9 +191,9 @@ public class InMemoryBoardgameRepository : IBoardgameRepository
         return boardGames.Find((game => game.boardgameid == boardgameId));
     }
 
-    public async Task<bool> AddBoardgame(BoardGame boardgame)
+    public async Task<bool> AddBoardgame(Boardgame boardgame)
     {
-        boardgame.boardgameId = boardGames.Count + 1;
+        //boardgame.boardgameId = boardGames.Count + 1;
         //boardGames.Add(boardgame);
         return true;
     }

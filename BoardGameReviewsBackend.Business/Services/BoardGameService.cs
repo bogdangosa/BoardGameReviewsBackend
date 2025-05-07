@@ -1,5 +1,6 @@
 using BoardGameReviewsBackend.Business.Models;
 using BoardGameReviewsBackend.Business.Repositories;
+using BoardGameReviewsBackend.Data.Models;
 
 namespace BoardGameReviewsBackend.Business.Services;
 
@@ -14,7 +15,7 @@ public class BoardGameService : IBoardGameService
         _reviewsService = reviewsService;
     }
     
-    public async Task<bool> AddBoardgame(BoardGame boardgame)
+    public async Task<bool> AddBoardgame(Boardgame boardgame)
     {
         return await _boardgameRepository.AddBoardgame(boardgame);
     }

@@ -12,5 +12,6 @@ public static class ServiceExtensions
         services.AddTransient<IImageService, ImageService>(); 
         services.AddScoped<IUserService, UserService>(); 
         services.AddScoped<ILogService, LogService>(); 
+        services.AddScoped<IAdminService, AdminService>(); 
     }
 }

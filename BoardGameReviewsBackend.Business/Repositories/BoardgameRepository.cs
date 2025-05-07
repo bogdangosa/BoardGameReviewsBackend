@@ -33,18 +33,9 @@ public class BoardgameRepository : IBoardgameRepository
         return queryResponse;
     }
 
-    public async Task<bool> AddBoardgame(BoardGame boardgame)
+    public async Task<bool> AddBoardgame(Boardgame boardgame)
     {
-        
-        var newBoardgame = new Data.Models.Boardgame
-        {
-            Title = boardgame.Title,
-            Category = boardgame.Category,
-            Description = boardgame.Description,
-            Image = boardgame.Image,
-            ReleaseDate = boardgame.ReleaseDate
-        };
-        _dbContext.Boardgames.Add(newBoardgame);
+        _dbContext.Boardgames.Add(boardgame);
         
         await _dbContext.SaveChangesAsync();
         return true;

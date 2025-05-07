@@ -10,5 +10,6 @@ public static class RepositoryExtensions
         services.AddScoped<IBoardgameRepository, BoardgameRepository>();
         services.AddScoped<IReviewsRepository, ReviewsRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<ILogRepository, LogRepository>();
     }
 }

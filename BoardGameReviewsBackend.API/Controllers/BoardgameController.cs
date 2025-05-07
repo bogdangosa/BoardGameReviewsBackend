@@ -56,7 +56,7 @@ namespace BoardGameReviewsBackend.Controllers
             string imageAdress = await _imageService.SaveImage(addBoardgameRequest.ImageFile,allowedExtensions);
             Debug.WriteLine(imageAdress);
             
-            bool addedBoardgame = await _boardgameService.AddBoardgame(addBoardgameRequest.toModel(imageAdress));
+            bool addedBoardgame = await _boardgameService.AddBoardgame(addBoardgameRequest.toDatabaseModel(imageAdress));
             
             if (addedBoardgame) 
                 return Ok();
