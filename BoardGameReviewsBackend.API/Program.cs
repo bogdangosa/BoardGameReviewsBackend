@@ -1,4 +1,5 @@
 using BoardGameReviewsBackend.API.Hubs.BoardgameStats;
+using BoardGameReviewsBackend.API.Middleware;
 using BoardGameReviewsBackend.Business.Extensions;
 using BoardGameReviewsBackend.Data;
 using Microsoft.AspNetCore.Http.Features;
@@ -49,6 +50,8 @@ builder.Services.Configure<FormOptions>(options =>
 });
 
 var app = builder.Build();
+
+app.UseMiddleware<RequestLoggingMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

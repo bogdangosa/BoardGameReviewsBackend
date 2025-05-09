@@ -21,4 +21,9 @@ public class LogService : ILogService
     {
         return _logService.GetAllLogs();
     }
+
+    public async Task<bool> DeleteAllLogs()
+    {
+        return await _logService.DeleteAllLogs();
+    }
 }

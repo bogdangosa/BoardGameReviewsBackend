@@ -14,4 +14,6 @@ public interface IUserRepository
     
     public Task<bool> DeleteUser(int userId);
     public Task<bool> MakeUserAdmin(int userId);
+    public Task<bool> AddUserToMonitoredUsers(int userId);
+    public List<MonitoredUser> GetMonitoredUsers();
 }

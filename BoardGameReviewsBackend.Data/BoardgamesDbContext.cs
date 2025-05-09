@@ -15,10 +15,16 @@ public class BoardgamesDbContext : DbContext
     public DbSet<Models.User> Users { get; set; }
     public DbSet<Models.Log> Logs { get; set; }
     
+    public DbSet<Models.MonitoredUser> MonitoredUsers { get; set; }
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new BoardgameConfiguration());
+        modelBuilder.ApplyConfiguration(new MonitoredUserConfiguration());
+        modelBuilder.Entity<Review>()
+            .HasIndex(r => r.boardgameId);
         base.OnModelCreating(modelBuilder);
+        
         
         modelBuilder.Entity<User>().HasData(
             new User

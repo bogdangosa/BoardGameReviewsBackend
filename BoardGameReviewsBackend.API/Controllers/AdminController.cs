@@ -17,7 +17,7 @@ namespace BoardGameReviewsBackend.Controllers
         [HttpGet("get-logs")]
         public IActionResult  GetAllLogs()
         {
-            return Ok();
+            return Ok(_adminService.GetAllLogs());
         }
         
         [HttpPost("seed-boardgames")]
@@ -25,6 +25,18 @@ namespace BoardGameReviewsBackend.Controllers
         {
             
             return Ok(await _adminService.GenerateBoardgameData(numberOfGames));
+        }
+        
+        [HttpGet("get-monitored-users")]
+        public IActionResult GetMonitoredUsers()
+        {
+            return Ok(_adminService.GetSuspectUsers());
+        }
+        
+        [HttpDelete("delete-all-logs")]
+        public async Task<IActionResult> DeleteAllLogs()
+        {
+            return Ok(_adminService.DeleteAllLogs());
         }
     }
 }

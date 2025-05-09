@@ -1,5 +1,6 @@
 using BoardGameReviewsBackend.Data;
 using BoardGameReviewsBackend.Data.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BoardGameReviewsBackend.Business.Repositories;
 
@@ -28,9 +29,12 @@ public class UserRepository : IUserRepository
         return result;
     }
 
-    public Task<bool> AddUser(User user)
+    public async Task<bool> AddUser(User user)
     {
-        throw new NotImplementedException();
+        _dbContext.Users.Add(user);
+        
+        await _dbContext.SaveChangesAsync();
+        return true;
     }
 
     public User LoginUser(string username, string password)
@@ -71,5 +75,33 @@ public class UserRepository : IUserRepository
         user.isAdmin = true;
         await _dbContext.SaveChangesAsync();
         return true;
+    }
+
+    public async Task<bool> AddUserToMonitoredUsers(int userId)
+    {
+        var existingUser = await _dbContext.MonitoredUsers.FirstOrDefaultAsync(m => m.userId == userId);
+        if (existingUser == null)
+        {
+            _dbContext.MonitoredUsers.Add(new MonitoredUser { userId = userId, monitoredSince = DateTime.UtcNow });
+        }
+        return true;
+    }
+
+    public List<MonitoredUser> GetMonitoredUsers()
+    {
+        return _dbContext.MonitoredUsers
+            .Include(mu => mu.user)
+            .Select(mu => new MonitoredUser
+            {
+                monitoredId = mu.monitoredId,
+                userId = mu.userId,
+                monitoredSince = mu.monitoredSince,
+                user = new User
+                {
+                    userId = mu.user.userId,
+                    username = mu.user.username,
+                }
+            })
+            .ToList();
     }
 }

@@ -47,6 +47,11 @@ public class UserService : IUserService
         return await _userRepository.MakeUserAdmin(userId);
     }
 
+    public List<MonitoredUser> GetMonitoredUsers()
+    {
+        return _userRepository.GetMonitoredUsers();
+    }
+
     public string GenerateJwtToken(User user)
     {
         throw new NotImplementedException();

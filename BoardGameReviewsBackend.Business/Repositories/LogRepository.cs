@@ -23,4 +23,11 @@ public class LogRepository : ILogRepository
     {
         return _dbContext.Logs.ToList();
     }
+
+    public async Task<bool> DeleteAllLogs()
+    {
+        _dbContext.Logs.RemoveRange(_dbContext.Logs);
+        await _dbContext.SaveChangesAsync();
+        return true;
+    }
 }

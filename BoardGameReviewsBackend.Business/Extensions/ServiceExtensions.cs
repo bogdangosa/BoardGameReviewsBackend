@@ -13,5 +13,6 @@ public static class ServiceExtensions
         services.AddScoped<IUserService, UserService>(); 
         services.AddScoped<ILogService, LogService>(); 
         services.AddScoped<IAdminService, AdminService>(); 
+        services.AddHostedService<LogMonitoringService>(); 
     }
 }

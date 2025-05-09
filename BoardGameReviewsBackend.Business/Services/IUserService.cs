@@ -15,6 +15,7 @@ public interface IUserService
     
     public Task<bool> DeleteUser(int userId);
     public Task<bool> MakeUserAdmin(int userId);
+    public List<MonitoredUser> GetMonitoredUsers();
     
     public string GenerateJwtToken(User user);
 }

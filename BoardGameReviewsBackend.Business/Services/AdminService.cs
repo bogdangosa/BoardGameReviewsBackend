@@ -7,11 +7,13 @@ public class AdminService : IAdminService
 {
     private readonly IBoardGameService _boardgameService;
     private readonly ILogService _logService;
+    private readonly IUserService _userService;
     
-    public AdminService(IBoardGameService boardgameService,ILogService logService)
+    public AdminService(IBoardGameService boardgameService,ILogService logService,IUserService userService)
     {
         _boardgameService = boardgameService;
         _logService = logService;
+        _userService = userService;
     }
     
     public async Task<List<Boardgame>> GenerateBoardgameData(int numberOfBoardgames)
@@ -23,5 +25,19 @@ public class AdminService : IAdminService
             await _boardgameService.AddBoardgame(boardgame);
         }
         return boardgames;
+    }
+
+    public List<Log> GetAllLogs()
+    {
+        return _logService.GetAllLogs();
+    }
+    public List<MonitoredUser> GetSuspectUsers()
+    {
+        return _userService.GetMonitoredUsers();
+    }
+
+    public async Task<bool> DeleteAllLogs()
+    {
+        return await _logService.DeleteAllLogs();
     }
 }
