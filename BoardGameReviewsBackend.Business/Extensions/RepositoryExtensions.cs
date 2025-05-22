@@ -5,6 +5,7 @@ namespace BoardGameReviewsBackend.Business.Extensions;
 
 public static class RepositoryExtensions
 {
+    
     public static void AddApplicationRepositories(this IServiceCollection services)
     {
         services.AddScoped<IBoardgameRepository, BoardgameRepository>();
@@ -12,4 +13,5 @@ public static class RepositoryExtensions
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<ILogRepository, LogRepository>();
     }
+
 }

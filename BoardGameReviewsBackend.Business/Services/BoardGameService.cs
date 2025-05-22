@@ -16,22 +16,14 @@ public class BoardGameService : IBoardGameService
     }
     
     public async Task<bool> AddBoardgame(Boardgame boardgame)
-    {
-        return await _boardgameRepository.AddBoardgame(boardgame);
-    }
-
+        => await _boardgameRepository.AddBoardgame(boardgame);
+    
     public BoardgameDetailedResponse GetBoardgame(int boardgameId)
-    {
-        BoardgameDetailedResponse response =  _boardgameRepository.GetBoardgameById(boardgameId).ToBoardgameDetailedResponse();
-        response.Rating = _reviewsService.GetAverageRatingOfBoardgame(boardgameId);
-        return response;
-    }
-
+        => _boardgameRepository.GetBoardgameById(boardgameId);
+    
     public List<BoardgameSummaryResponse> GetFilteredBoardgames(int page=1,int itemsPerPage=4,string sortOrder="none", string category="All")
     {
-        List<BoardgameSummaryResponse> boardGames = this.GetAllBoardgames();
-        if(category != "All")
-            boardGames = boardGames.Where(boardgame => boardgame.Category == category).ToList();
+        List<BoardgameSummaryResponse> boardGames = _boardgameRepository.GetBoardgames(page, itemsPerPage,category,sortOrder).ToBoardgameSummaryResponses();;
         if (sortOrder == "Alphabetically")
             boardGames.Sort((boardGame1, boardGame2) => 
                 SortAlphabetical(boardGame1, boardGame2));
@@ -41,19 +33,20 @@ public class BoardGameService : IBoardGameService
         else 
             boardGames.Sort((boardGame1, boardGame2) => 
                 SortById(boardGame1, boardGame2));
-        boardGames = boardGames.Skip((page-1)*itemsPerPage).Take(itemsPerPage).ToList();
-        
         return boardGames;
     }
 
     public List<BoardgameSummaryResponse> GetAllBoardgames()
     {
-        List<BoardgameSummaryResponse> boardgameResponses = _boardgameRepository.GetAllBoardgames().ToBoardgameSummaryResponses();
+        return _boardgameRepository.GetAllBoardgames();
+    }
+    
+    public List<BoardgameSummaryResponse> AddRatingToResponses(List<BoardgameSummaryResponse> boardgameResponses)
+    {
         foreach (var boardgame in boardgameResponses)
         {
             boardgame.Rating = _reviewsService.GetAverageRatingOfBoardgame(boardgame.boardgameId);
         }
-    
         return boardgameResponses;
     }
 
@@ -69,7 +62,7 @@ public class BoardGameService : IBoardGameService
 
     public static int SortByRating(BoardgameSummaryResponse boardgame1, BoardgameSummaryResponse boardgame2)
     {
-        return boardgame2.Rating - boardgame1.Rating;
+        return (int)(boardgame2.Rating - boardgame1.Rating);
     }
     
 

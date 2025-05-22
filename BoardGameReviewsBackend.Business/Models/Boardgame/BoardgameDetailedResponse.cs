@@ -11,5 +11,5 @@ public class BoardgameDetailedResponse
     public int? NumberOfPlayers { get; set; }
     public int? PlayTime { get; set; }
     public double? Weight { get; set; }
-    public int Rating { get; set; }   
+    public double Rating { get; set; }   
 }

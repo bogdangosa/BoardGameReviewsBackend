@@ -29,10 +29,6 @@
 
     <ItemGroup>
       <Folder Include="Business\Repository\" />
-      <Folder Include="Business\Service\Boardgame\" />
-      <Folder Include="Business\Service\Log\" />
-      <Folder Include="Business\Service\Review\" />
-      <Folder Include="Business\Service\User\" />
     </ItemGroup>
 
 </Project>
