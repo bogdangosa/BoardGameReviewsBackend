@@ -24,5 +24,13 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
+# Install EF CLI
+RUN dotnet tool install --global dotnet-ef
+ENV PATH="$PATH:/root/.dotnet/tools"
+
+# Add startup script
+COPY entrypoint.sh .
+RUN chmod +x entrypoint.sh
+
 ENV ASPNETCORE_URLS=http://0.0.0.0:10000
 ENTRYPOINT ["dotnet", "BoardGameReviewsBackend.API.dll"]
