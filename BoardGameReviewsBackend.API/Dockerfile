@@ -30,6 +30,6 @@ ENV PATH="$PATH:/root/.dotnet/tools"
 
 ENV ASPNETCORE_URLS=http://0.0.0.0:10000
 
-COPY entrypoint.sh .
+COPY ["BoardGameReviewsBackend.API/entrypoint.sh", "."]
 RUN chmod +x entrypoint.sh
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["./BoardGameReviewsBackend.API/entrypoint.sh"]
