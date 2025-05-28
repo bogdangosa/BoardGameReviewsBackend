@@ -18,4 +18,7 @@ public interface IUserService
     public List<MonitoredUser> GetMonitoredUsers();
     
     public string GenerateJwtToken(User user);
+    public Task<bool> RequestEmailConfirmation(int userId);
+    public bool VerifyCode(int userId, string code);
+    public (string,DateTime) GenerateEmailVerificationCode();
 }

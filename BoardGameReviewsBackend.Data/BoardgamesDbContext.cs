@@ -30,23 +30,29 @@ public class BoardgamesDbContext : DbContext
             new User
             {
                 userId = 1,
+                email = "admin@admin.com",
                 username = "admin",
                 password = "admin123",
-                isAdmin = true
+                isAdmin = true,
+                isVerified = true,
             },
             new User
             {
                 userId = 2,
+                email = "john.doe@gmail.com",
                 username = "john_doe",
                 password = "123123",
-                isAdmin = false
+                isAdmin = false,
+                isVerified = true,
             },
             new User
             {
                 userId = 3,
+                email = "jane.smith@gmail.com",
                 username = "jane_smith",
                 password = "password",
-                isAdmin = false
+                isAdmin = false,
+                isVerified = false,
             }
         );
         

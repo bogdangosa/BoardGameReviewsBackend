@@ -1,9 +1,11 @@
 using BoardGameReviewsBackend.API.Requests.Reviews;
 using BoardGameReviewsBackend.Business.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BoardGameReviewsBackend.Controllers
 {
+    
     [ApiController]
     [Route("[controller]")]
     public class ReviewsController : ControllerBase
@@ -39,18 +41,21 @@ namespace BoardGameReviewsBackend.Controllers
             return Ok(_reviewsService.GetReviewByBoardgameIdAndUserId(boardgameId,userId));
         }
         
+        [Authorize]
         [HttpDelete("delete")]
         public async Task<IActionResult>  DeleteReview([FromQuery] int reviewId)
         {
             return Ok(await _reviewsService.DeleteReview(reviewId));
         }
         
+        [Authorize]
         [HttpPost("add")]
         public async Task<IActionResult>  AddReview([FromBody] AddReviewRequest request)
         {
             return Ok(await _reviewsService.AddReview(request.toModel()));
         }
         
+        [Authorize]
         [HttpPatch("update")]
         public IActionResult UpdateReview([FromBody] UpdateReviewRequest request)
         {

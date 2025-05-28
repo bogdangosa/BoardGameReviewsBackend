@@ -11,12 +11,17 @@ public class RequestLoggingMiddleware
     private readonly RequestDelegate _next;
     private readonly IServiceProvider _serviceProvider;
     
-    private readonly List<string> _excludedPaths = new()
+    private readonly List<string> _observedPaths = new()
     {
-        "/Boardgame/is-available",
-        "/Admin/get-logs",
-        "/swagger/v1/swagger.json",
-        "/swagger/index.html",
+        "/Boardgame/add",
+        "/Boardgame/delete",
+        "/Boardgame/update",
+        "/Reviews/add",
+        "/Reviews/delete",
+        "/Reviews/update",
+        "/User/login",
+        "/User/sign-up",
+        "/User/delete",
     };
 
     public RequestLoggingMiddleware(RequestDelegate next, IServiceProvider serviceProvider)
@@ -27,15 +32,33 @@ public class RequestLoggingMiddleware
 
     public async Task InvokeAsync(HttpContext context)
     {
+        // Skip logging for OPTIONS requests
+        if (context.Request.Method.Equals("OPTIONS", StringComparison.OrdinalIgnoreCase))
+        {
+            await _next(context);
+            return;
+        }
         Console.WriteLine($"Request: {context.Request.Method} {context.Request.Path}");
         // Proceed with the request
         // After the request has been handled, log it
-        if (!_excludedPaths.Contains(context.Request.Path.Value, StringComparer.OrdinalIgnoreCase))
+        if (_observedPaths.Contains(context.Request.Path.Value, StringComparer.OrdinalIgnoreCase))
         {
             using (var scope = _serviceProvider.CreateScope())
             {
                 var logService = scope.ServiceProvider.GetRequiredService<ILogService>();
-                var userId = 1;
+                
+                int userId = 1;
+                var user = context.User;
+                if (user.Identity?.IsAuthenticated == true)
+                {
+                    var userIdClaim = user.FindFirst(ClaimTypes.NameIdentifier); // Adjust claim type as needed
+                    if (userIdClaim != null && int.TryParse(userIdClaim.Value, out var parsedId))
+                    {
+                        userId = parsedId;
+                    }
+                }
+                Console.WriteLine($"UserId: {userId}");
+                
                 var action = $"{context.Request.Method} {context.Request.Path}";
 
                 var log = new Log

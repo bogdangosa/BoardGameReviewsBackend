@@ -1,4 +1,5 @@
 using BoardGameReviewsBackend.Business.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BoardGameReviewsBackend.Controllers
@@ -14,12 +15,14 @@ namespace BoardGameReviewsBackend.Controllers
             _adminService = adminService;
         }
         
+        [Authorize]
         [HttpGet("get-logs")]
         public IActionResult  GetAllLogs()
         {
             return Ok(_adminService.GetAllLogs());
         }
         
+        [Authorize]
         [HttpPost("seed-boardgames")]
         public async Task<IActionResult> SeedBoardGames([FromQuery] int numberOfGames)
         {
@@ -27,16 +30,18 @@ namespace BoardGameReviewsBackend.Controllers
             return Ok(await _adminService.GenerateBoardgameData(numberOfGames));
         }
         
+        [Authorize]
         [HttpGet("get-monitored-users")]
         public IActionResult GetMonitoredUsers()
         {
             return Ok(_adminService.GetSuspectUsers());
         }
         
+        [Authorize]
         [HttpDelete("delete-all-logs")]
         public async Task<IActionResult> DeleteAllLogs()
         {
-            return Ok(_adminService.DeleteAllLogs());
+            return Ok(await _adminService.DeleteAllLogs());
         }
     }
 }

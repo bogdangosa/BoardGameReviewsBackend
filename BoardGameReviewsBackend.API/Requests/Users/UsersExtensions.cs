@@ -11,7 +11,9 @@ public static class UsersExtensions
             {
                 userId = 0,
                 isAdmin = false,
+                isVerified = false,
                 password = request.password,
+                email = request.email,
                 username = request.username,
             };
 }

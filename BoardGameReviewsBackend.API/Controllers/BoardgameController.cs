@@ -1,10 +1,12 @@
 using System.Diagnostics;
 using BoardGameReviewsBackend.API.Requests.Boardgames;
 using BoardGameReviewsBackend.Business.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BoardGameReviewsBackend.Controllers
 {
+    
     [ApiController]
     [Route("[controller]")]
     public class BoardgameController : ControllerBase
@@ -26,6 +28,7 @@ namespace BoardGameReviewsBackend.Controllers
             return Ok(true);
         }
         
+        [Authorize]
         [HttpGet("get-all")]
         public IActionResult GetAllBoardgames()
         {
@@ -49,6 +52,7 @@ namespace BoardGameReviewsBackend.Controllers
             return Ok(_boardgameService.GetBoardgame(boardgameId));
         }
         
+        [Authorize]
         [HttpPost("add")]
         public async Task<IActionResult> AddBoardgame([FromForm] AddBoardgameRequest addBoardgameRequest)
         {
@@ -59,17 +63,19 @@ namespace BoardGameReviewsBackend.Controllers
             bool addedBoardgame = await _boardgameService.AddBoardgame(addBoardgameRequest.toDatabaseModel(imageAdress));
             
             if (addedBoardgame) 
-                return Ok();
+                return Ok(addedBoardgame);
             else
                 return BadRequest();
         }
         
+        [Authorize]
         [HttpDelete("delete")]
         public async Task<IActionResult> DeleteBoardgame([FromQuery] DeleteBoardgameRequest request)
         {
             return Ok(await _boardgameService.DeleteBoardgame(request.boardgameId));
         }
         
+        [Authorize]
         [HttpPatch("update")]
         public IActionResult UpdateBoardgame([FromBody] UpdateBoardgameRequest request)
         {
