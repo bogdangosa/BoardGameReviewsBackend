@@ -28,9 +28,8 @@ COPY --from=publish /app/publish .
 RUN dotnet tool install --global dotnet-ef
 ENV PATH="$PATH:/root/.dotnet/tools"
 
-# Add startup script
+ENV ASPNETCORE_URLS=http://0.0.0.0:10000
+
 COPY entrypoint.sh .
 RUN chmod +x entrypoint.sh
-
-ENV ASPNETCORE_URLS=http://0.0.0.0:10000
-ENTRYPOINT ["dotnet", "BoardGameReviewsBackend.API.dll"]
+ENTRYPOINT ["./entrypoint.sh"]
