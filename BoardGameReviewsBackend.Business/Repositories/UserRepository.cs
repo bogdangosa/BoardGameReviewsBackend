@@ -29,12 +29,12 @@ public class UserRepository : IUserRepository
         return result;
     }
 
-    public async Task<bool> AddUser(User user)
+    public async Task<User> AddUser(User user)
     {
         _dbContext.Users.Add(user);
         
         await _dbContext.SaveChangesAsync();
-        return true;
+        return user;
     }
 
     public User LoginUser(string username, string password)

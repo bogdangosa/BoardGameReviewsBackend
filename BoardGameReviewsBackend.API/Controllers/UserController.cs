@@ -29,7 +29,9 @@ namespace BoardGameReviewsBackend.Controllers
         [HttpPost("sign-up")]
         public async Task<IActionResult> SignUpUser(SignupRequest request)
         {
-            return Ok(await _usersService.AddUser(request.toModel()));
+            var userResponse = await _usersService.AddUser(request.toModel());
+            //var token = _usersService.GenerateJwtToken(userResponse);
+            return Ok(new { wasSignupSuccessfull= true , token = "null", user = userResponse });
         }
         
         [HttpPost("login")]

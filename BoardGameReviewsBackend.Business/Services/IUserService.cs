@@ -4,7 +4,7 @@ namespace BoardGameReviewsBackend.Business.Services;
 
 public interface IUserService
 {
-    public Task<bool> AddUser(User user);
+    public Task<User> AddUser(User user);
 
     public List<User> GetAllUsers();
     public User GetUser(int userId);

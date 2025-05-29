@@ -37,10 +37,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
-        policy.WithOrigins(allowedOrigins)
+        policy.AllowAnyOrigin()
             .AllowAnyHeader()
-            .AllowAnyMethod()
-            .AllowCredentials();
+            .AllowAnyMethod();
+        //.AllowCredentials();
     });
 });
 
@@ -125,11 +125,11 @@ app.UseHttpsRedirection();
 });*/
 
 
-app.UseAuthorization();
-
 app.MapControllers();
 
 app.UseCors("AllowAll");
+
+app.UseAuthorization();
 
 app.MapHub<BoardgameStatsHub>("/boardgameStatsHub");
 

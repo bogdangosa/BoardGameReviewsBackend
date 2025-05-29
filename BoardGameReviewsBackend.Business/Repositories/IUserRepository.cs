@@ -6,7 +6,7 @@ public interface IUserRepository
 {
     public List<User> GetAllUsers();
     public User GetUser(int userId);
-    public Task<bool> AddUser(User user);
+    public Task<User> AddUser(User user);
     
     public User LoginUser(string username, string password);
     

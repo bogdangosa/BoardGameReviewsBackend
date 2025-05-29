@@ -22,12 +22,12 @@ public class UserService : IUserService
         _jwtSettings = jwtOptions.Value;
     }
     
-    public async Task<bool> AddUser(User user)
+    public async Task<User> AddUser(User user)
     {
-        bool result =  await _userRepository.AddUser(user);
-        if(result)
+        User userResponse  =  await _userRepository.AddUser(user);
+        if(userResponse!=null)
             await _emailService.SendWelcomeEmailAsync(user.email,user.username);
-        return result;
+        return userResponse;
     }
 
     public List<User> GetAllUsers()
