@@ -26,6 +26,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSignalR();
 
+builder.WebHost.UseUrls("http://localhost:5000");
 
 var allowedOrigins = new[] {
     "http://localhost:3000",
