@@ -48,7 +48,7 @@ public class EmailService : IEmailService
 
         await SendEmailAsync(toEmail, "Welcome to Board Game Reviews!", emailBody);
     }
-    
+
     public async Task SendConfirmationEmailAsync(string toEmail, string code)
     {
         var templatePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "..", "BoardGameReviewsBackend.Business", "EmailTemplates", "ConfirmationEmail.html"));
